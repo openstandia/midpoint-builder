@@ -43,13 +43,13 @@
         <dependency>
             <groupId>com.evolveum.midpoint.model</groupId>
             <artifactId>model-impl</artifactId>
-            <version>4.3</version>
+            <version>4.3.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.evolveum.midpoint.gui</groupId>
             <artifactId>admin-gui</artifactId>
-            <version>4.3</version>
+            <version>4.3.1</version>
             <scope>compile</scope>
             <classifier>classes</classifier>
             <exclusions>
