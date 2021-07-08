@@ -27,7 +27,7 @@ jobs:
       - name: Prepare Image Tag
         id: prep
         run: |
-          BASE_REVISION=`grep "ARG BASE_REVISION" Dockerfile | cut -d "=" -f 2 | sed "s/^v//"`
+          BASE_REVISION=`grep "ARG BASE_REVISION" Dockerfile | cut -d "=" -f 2 | sed "s/^v//" | head -n 1`
           RELEASE_REVISION=`grep "ARG RELEASE_REVISION" Dockerfile | cut -d "=" -f 2`
           IMAGE_TAG=${BASE_REVISION}-${RELEASE_REVISION}
           FULL_IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/${IMAGE_NAME}

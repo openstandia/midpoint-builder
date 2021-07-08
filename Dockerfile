@@ -21,7 +21,8 @@ RUN git clone --branch support-4.3 --single-branch https://github.com/Evolveum/m
 WORKDIR /build/midpoint
 
 # Cache dependencies with base version
-# v4.3.1 can't build now due to jasper report repository change
+#ARG BASE_REVISION=v4.3
+# v4.3, v4.3.1 can't build now due to jasper report repository change
 ARG BASE_REVISION=73806a2c1ed430d60777639eb06fb3f3f42ee70f
 RUN git pull && git checkout $BASE_REVISION \
   && mvn clean install -P -dist -DskipTests=true \
