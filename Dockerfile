@@ -34,7 +34,7 @@ COPY --from=localization \
   /root/.m2/repository/com/evolveum/midpoint/midpoint-localization/
 
 # Build with release version
-ARG RELEASE_REVISION=54eeebd1d795d4c5ad9c5baada8bf75ce2315956
+ARG RELEASE_REVISION=3851d1470dc1f251cf24f343ba30256e4625b6e1
 RUN git pull && git checkout $RELEASE_REVISION \
   && mvn clean install -P -dist -DskipTests=true \
   && mv gui/admin-gui/target/midpoint-executable.war /build/midpoint.war \
