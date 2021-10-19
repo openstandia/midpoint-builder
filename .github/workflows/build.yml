@@ -3,8 +3,7 @@ name: Build and Publish Docker
 on:
   push:
     branches:
-      - support-4.4
-      - support-4.3
+      - main
 
 jobs:
   build_and_push:
@@ -41,8 +40,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
-          push: true
+          push: false
           tags: ${{ steps.prep.outputs.name }}:${{ steps.prep.outputs.tag }}
-          cache-from: type=registry,ref=${{ steps.prep.outputs.name }}:support-4.4
-          cache-to: type=registry,ref=${{ steps.prep.outputs.name }}:support-4.4,mode=max
+          cache-from: type=registry,ref=${{ steps.prep.outputs.name }}:main
+          cache-to: type=registry,ref=${{ steps.prep.outputs.name }}:main,mode=max
 
