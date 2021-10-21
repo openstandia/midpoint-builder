@@ -70,11 +70,14 @@ RUN git pull && git checkout $BASE_REVISION \
   && git clean -df
 
 # Build with release version
-ARG RELEASE_REVISION=0879caee18c8f4d4e8ba0ca18fa387f7114dd1eb
+ARG RELEASE_REVISION=50117cc036f450cede53f87b6a7b25adca25821f
 RUN git pull && git checkout $RELEASE_REVISION \
   && mvn clean install -P -dist -DskipTests=true \
   && mv gui/admin-gui/target/midpoint-executable.war /build/midpoint.war \
   && git clean -df
+
+# Define base image tag
+ARG BASE_IMAGE_TAG=4.4
 
 # Create VERSION file
 RUN git rev-parse HEAD > /build/VERSION.txt
