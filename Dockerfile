@@ -36,7 +36,7 @@ RUN git pull && git checkout $PRISM_BASE_REVISION \
   && mvn clean install -P -dist -DskipTests=true \
   && git clean -df
 
-ARG PRISM_RELEASE_REVISION=78908ae654b75ce4f2bc5268d1dfae092c029cea
+ARG PRISM_RELEASE_REVISION=b0d9e12975c8b80ed692a6293338b98706446a55
 RUN git pull && git checkout $PRISM_RELEASE_REVISION \
   && mvn clean install -P -dist -DskipTests=true \
   && git clean -df
@@ -70,7 +70,7 @@ RUN git pull && git checkout $BASE_REVISION \
   && git clean -df
 
 # Build with release version
-ARG RELEASE_REVISION=5110f7a06cddaff614dd37c7b05726137e95be0e
+ARG RELEASE_REVISION=6bab926020ac725af3c853b2295fe0ffb769576d
 RUN git pull && git checkout $RELEASE_REVISION \
   && mvn clean install -P -dist -DskipTests=true \
   && mv gui/admin-gui/target/midpoint-executable.war /build/midpoint.war \
