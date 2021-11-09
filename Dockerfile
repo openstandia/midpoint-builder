@@ -61,7 +61,7 @@ COPY --from=prism \
   /root/.m2/repository/com/evolveum/prism/
 
 # Cache dependencies with base version
-ARG BASE_REVISION=0879caee18c8f4d4e8ba0ca18fa387f7114dd1eb
+ARG BASE_REVISION=e813c20aa62d0046d4085cf8d94bfdfe051f4fc5
 RUN git pull && git checkout $BASE_REVISION \
   && mvn verify clean --fail-never \
   && git clean -df
