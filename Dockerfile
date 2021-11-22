@@ -14,7 +14,7 @@ RUN git pull && git checkout $LOCALIZATION_BASE_REVISION \
   && mvn clean install \
   && git clean -df
 
-ARG LOCALIZATION_RELEASE_REVISION=629a20166e802057fbbc57094ca699d5ee8da5a5
+ARG LOCALIZATION_RELEASE_REVISION=b7fd804f05dc8ddc44090d542ec02cbe7d653be4
 RUN git pull && git checkout $LOCALIZATION_RELEASE_REVISION \
   && mvn clean install \
   && git clean -df
@@ -36,7 +36,7 @@ RUN git pull && git checkout $PRISM_BASE_REVISION \
   && mvn clean install -P -dist -DskipTests=true \
   && git clean -df
 
-ARG PRISM_RELEASE_REVISION=496c72be56c78bda3810c3fcbcec6c092100c013
+ARG PRISM_RELEASE_REVISION=9f170ad694c4cde755c5b52ee6c296e523de892d
 RUN git pull && git checkout $PRISM_RELEASE_REVISION \
   && mvn clean install -P -dist -DskipTests=true \
   && git clean -df
@@ -70,7 +70,7 @@ COPY --from=prism \
 #  && git clean -df
 
 # Build with release version
-ARG RELEASE_REVISION=9dadb6a31f3e3e6d22def6d8f0d365f80b7e7454
+ARG RELEASE_REVISION=16b036b2d888da91772578172563a898864e1f62
 RUN git pull && git checkout $RELEASE_REVISION \
   && mvn clean install -P -dist -DskipTests=true \
   && mv gui/admin-gui/target/midpoint-executable.war /build/midpoint.war \
