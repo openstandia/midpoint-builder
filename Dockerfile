@@ -2,7 +2,7 @@ FROM maven:3.6.2-jdk-11 as localization
 
 # Build midpoint-localization
 WORKDIR /build
-RUN git clone --branch master --single-branch https://github.com/Evolveum/midpoint-localization
+RUN git clone --branch support-4.4 --single-branch https://github.com/Evolveum/midpoint-localization
 
 WORKDIR /build/midpoint-localization
 
@@ -24,7 +24,7 @@ FROM maven:3.6.2-jdk-11 as prism
 
 # Build prism
 WORKDIR /build
-RUN git clone --branch master --single-branch https://github.com/Evolveum/prism
+RUN git clone --branch support-4.4 --single-branch https://github.com/Evolveum/prism
 
 WORKDIR /build/prism
 
@@ -46,7 +46,7 @@ FROM maven:3.6.2-jdk-11 as builder
 
 # Build midpoint
 WORKDIR /build
-RUN git clone --branch master --single-branch https://github.com/Evolveum/midpoint
+RUN git clone --branch support-4.4 --single-branch https://github.com/Evolveum/midpoint
 
 WORKDIR /build/midpoint
 
