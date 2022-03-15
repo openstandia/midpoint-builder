@@ -14,7 +14,7 @@ WORKDIR /build/midpoint-localization
 #   && mvn clean install \
 #   && git clean -df
 
-ARG LOCALIZATION_RELEASE_REVISION=0a67d96370f645c29d048a966e6a1402072257ec
+ARG LOCALIZATION_RELEASE_REVISION=797411d20cf1a63bc6003b60adfb62fa51115f4f
 RUN git pull && git checkout $LOCALIZATION_RELEASE_REVISION \
   && mvn clean install \
   && git clean -df
@@ -62,7 +62,7 @@ RUN git pull && git checkout $BASE_REVISION \
  && git clean -df
 
 # Build with release version
-ARG RELEASE_REVISION=e779e2033492fb95580cf41a84a39938b5410e5f
+ARG RELEASE_REVISION=ff1a70d6d1e3777f28c1ddf90f81b708c8ca099e
 RUN git pull && git checkout $RELEASE_REVISION \
   && mvn clean install -P -dist -DskipTests=true \
   && mv gui/admin-gui/target/midpoint-executable.war /build/midpoint.war \
