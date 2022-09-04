@@ -6,7 +6,7 @@ RUN git clone --branch support-4.0 --single-branch https://github.com/Evolveum/m
 
 WORKDIR /build/midpoint-localization
 
-ARG LOCALIZATION_REVISION=6240622bf3aee664dfb699f87429f876fecb4bd1
+ARG LOCALIZATION_REVISION=192cc5b3790d4d2761c861fdeed25f6ea975b9d4
 RUN git pull && git checkout $LOCALIZATION_REVISION \
   && mvn clean install \
   && git clean -df
@@ -26,7 +26,7 @@ RUN git pull && git checkout $BASE_REVISION \
   && git clean -df
 
 # Cache dependencies with release version
-ARG RELEASE_REVISION=7f16d80e973b22344476a7b8fd7ef4c04e1d1f94
+ARG RELEASE_REVISION=7d9849624d3fee6904405d92b69c395190468db2
 RUN git pull && git checkout $RELEASE_REVISION \
   && sed -i -e "s|<repositories>|<repositories><repository><id>jaspersoft-third-party</id><name>Jasper</name><url>https://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts</url></repository>|" pom.xml \
   && mvn clean install -P -dist -DskipTests=true \
