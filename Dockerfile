@@ -28,7 +28,7 @@ RUN git clone --branch support-4.4 --single-branch https://github.com/Evolveum/p
 
 WORKDIR /build/prism
 
-ARG PRISM_RELEASE_REVISION=dc274986ab16322ab9549c28338e63e087564071
+ARG PRISM_RELEASE_REVISION=5807064df790f207851eb4779e91688446a7362d
 RUN git pull && git checkout $PRISM_RELEASE_REVISION \
   && mvn clean install -P -dist -DskipTests=true \
   && git clean -df
@@ -62,7 +62,7 @@ RUN git pull && git checkout $BASE_REVISION \
  && git clean -df
 
 # Build with release version
-ARG RELEASE_REVISION=4122702f27f8c0e4059c3ed63e973d338beb3f13
+ARG RELEASE_REVISION=e7f6d96e9249c81c26553e25e627ea399b52e8e1
 RUN git pull && git checkout $RELEASE_REVISION \
   && mvn clean install -P -dist -DskipTests=true \
   && mv gui/admin-gui/target/midpoint-executable.war /build/midpoint.war \
