@@ -62,7 +62,7 @@ RUN git pull && git checkout $BASE_REVISION \
  && git clean -df
 
 # Build with release version
-ARG RELEASE_REVISION=2ece42b97f24e0ffb1e946b82b076297864c4c35
+ARG RELEASE_REVISION=427a0cdf89fe1cce6673776a9640bac1c4ad6eb2
 RUN git pull && git checkout $RELEASE_REVISION \
   && mvn clean install -P -dist -DskipTests=true \
   && mv gui/admin-gui/target/midpoint-executable.war /build/midpoint.war \
