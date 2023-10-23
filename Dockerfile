@@ -1,8 +1,8 @@
-FROM maven:3.6.2-jdk-11 as localization
+FROM maven:3.9.5-eclipse-temurin-17 as localization
 
 # Build midpoint-localization
 WORKDIR /build
-RUN git clone --branch support-4.4 --single-branch https://github.com/Evolveum/midpoint-localization
+RUN git clone --branch support-4.8 --single-branch https://github.com/Evolveum/midpoint-localization
 
 WORKDIR /build/midpoint-localization
 
@@ -14,31 +14,31 @@ WORKDIR /build/midpoint-localization
 #   && mvn clean install \
 #   && git clean -df
 
-ARG LOCALIZATION_RELEASE_REVISION=1e44b99dde6fd9dcbbad104c7182f6730ad0d535
+ARG LOCALIZATION_RELEASE_REVISION=4e275459d6e2cf8d37da7b0ee7e355a10c559b18
 RUN git pull && git checkout $LOCALIZATION_RELEASE_REVISION \
   && mvn clean install \
   && git clean -df
 
 
-FROM maven:3.6.2-jdk-11 as prism
+FROM maven:3.9.5-eclipse-temurin-17 as prism
 
 # Build prism
 WORKDIR /build
-RUN git clone --branch support-4.4 --single-branch https://github.com/Evolveum/prism
+RUN git clone --branch support-4.8 --single-branch https://github.com/Evolveum/prism
 
 WORKDIR /build/prism
 
-ARG PRISM_RELEASE_REVISION=9921fecb12414ede2bd7f30b9c0ca05bcab36a35
+ARG PRISM_RELEASE_REVISION=81db478d5db18bbff6d2a5a26cf7050340b57cb5
 RUN git pull && git checkout $PRISM_RELEASE_REVISION \
   && mvn clean install -P -dist -DskipTests=true \
   && git clean -df
 
 
-FROM maven:3.6.2-jdk-11 as builder
+FROM maven:3.9.5-eclipse-temurin-17 as builder
 
 # Build midpoint
 WORKDIR /build
-RUN git clone --branch support-4.4 --single-branch https://github.com/Evolveum/midpoint
+RUN git clone --branch support-4.8 --single-branch https://github.com/Evolveum/midpoint
 
 WORKDIR /build/midpoint
 
@@ -53,23 +53,23 @@ COPY --from=prism \
   /root/.m2/repository/com/evolveum/prism/
 
 # Cache dependencies with base version
-ARG BASE_REVISION=v4.4.6
+ARG BASE_REVISION=v4.8
 RUN git pull && git checkout $BASE_REVISION \
  && mvn verify clean --fail-never \
  && git clean -df
 RUN git pull && git checkout $BASE_REVISION \
- && mvn clean install -P -dist -DskipTests=true \
+ && mvn clean install -P dist -DskipTests=true \
  && git clean -df
 
 # Build with release version
-ARG RELEASE_REVISION=a0778a00c6a78e9aa9e1b47f4fe7e52735cc7466
+ARG RELEASE_REVISION=e335d9f3ed6f49e012c8613f415b46d5e60ddd0b
 RUN git pull && git checkout $RELEASE_REVISION \
-  && mvn clean install -P -dist -DskipTests=true \
-  && mv gui/admin-gui/target/midpoint-executable.war /build/midpoint.war \
+  && mvn clean install -P dist -DskipTests=true \
+  && mv gui/midpoint-jar/target/midpoint.jar /build/midpoint.jar \
   && git clean -df
 
 # Define base image tag
-ARG BASE_IMAGE_TAG=4.4
+ARG BASE_IMAGE_TAG=4.8
 
 # Create VERSION file
 RUN git rev-parse HEAD > /build/VERSION.txt
