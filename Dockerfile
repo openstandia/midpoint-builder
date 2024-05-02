@@ -14,7 +14,7 @@ WORKDIR /build/midpoint-localization
 #   && mvn clean install \
 #   && git clean -df
 
-ARG LOCALIZATION_RELEASE_REVISION=3b1abe59c20af2469a6e5df20420a51b1bbe0a9a
+ARG LOCALIZATION_RELEASE_REVISION=ce83a4e1ac6a9b8ea404a5a1fba3d9c11130607d
 RUN git pull && git checkout $LOCALIZATION_RELEASE_REVISION \
   && mvn clean install \
   && git clean -df
@@ -28,7 +28,7 @@ RUN git clone --branch support-4.4 --single-branch https://github.com/Evolveum/p
 
 WORKDIR /build/prism
 
-ARG PRISM_RELEASE_REVISION=9cc3524f2d52982437c82c8af6ce1ed6f0924290
+ARG PRISM_RELEASE_REVISION=2f5bdd01a11e498626f08b1f932cbe5751840d7f
 RUN git pull && git checkout $PRISM_RELEASE_REVISION \
   && mvn clean install -P -dist -DskipTests=true \
   && git clean -df
@@ -53,7 +53,7 @@ COPY --from=prism \
   /root/.m2/repository/com/evolveum/prism/
 
 # Cache dependencies with base version
-ARG BASE_REVISION=v4.4.7
+ARG BASE_REVISION=v4.4.8
 RUN git pull && git checkout $BASE_REVISION \
  && mvn verify clean --fail-never \
  && git clean -df
@@ -62,7 +62,7 @@ RUN git pull && git checkout $BASE_REVISION \
  && git clean -df
 
 # Build with release version
-ARG RELEASE_REVISION=9415661dd718b8025bffc9970ef330d298fb74f6
+ARG RELEASE_REVISION=f5ef4a98e3dac39900a06c625c94d658d43af758
 RUN git pull && git checkout $RELEASE_REVISION \
   && mvn clean install -P -dist -DskipTests=true \
   && mv gui/admin-gui/target/midpoint-executable.war /build/midpoint.war \
