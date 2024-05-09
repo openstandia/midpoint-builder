@@ -62,7 +62,7 @@ RUN git pull && git checkout $BASE_REVISION \
  && git clean -df
 
 # Build with release version
-ARG RELEASE_REVISION=908daf9bfa83d9c91db17dd25ffcd3a1f85fd16b
+ARG RELEASE_REVISION=772b7400a11e7feca87ca95a8cb3dcb8c42f3f89
 RUN git pull && git checkout $RELEASE_REVISION \
   && mvn clean install -P dist -DskipTests=true \
   && mv gui/midpoint-jar/target/midpoint.jar /build/midpoint.jar \
