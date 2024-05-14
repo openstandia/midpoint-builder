@@ -4,7 +4,7 @@
     <name>midpoint extension project</name>
     <groupId>jp.openstandia</groupId>
     <artifactId>midpoint-extension</artifactId>
-    <version>4.8.2</version>
+    <version>4.8.3</version>
     <packaging>jar</packaging>
     <description>midPoint extension project</description>
 
@@ -53,13 +53,13 @@
         <dependency>
             <groupId>com.evolveum.midpoint.model</groupId>
             <artifactId>model-impl</artifactId>
-            <version>4.8.2</version>
+            <version>4.8.3</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.evolveum.midpoint.gui</groupId>
             <artifactId>admin-gui</artifactId>
-            <version>4.8.2</version>
+            <version>4.8.3</version>
             <scope>compile</scope>
             <exclusions>
                 <exclusion>
