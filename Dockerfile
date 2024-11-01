@@ -14,7 +14,7 @@ WORKDIR /build/midpoint-localization
 #   && mvn clean install \
 #   && git clean -df
 
-ARG LOCALIZATION_RELEASE_REVISION=b03916bfafd2ac31e5958f4fbc8986b96a1758e6
+ARG LOCALIZATION_RELEASE_REVISION=6c6873c75151dca6da3c5ea838ceac2e33c00670
 RUN git pull && git checkout $LOCALIZATION_RELEASE_REVISION \
   && mvn clean install \
   && git clean -df
@@ -28,7 +28,7 @@ RUN git clone --branch support-4.8 --single-branch https://github.com/Evolveum/p
 
 WORKDIR /build/prism
 
-ARG PRISM_RELEASE_REVISION=fb3f63352bc4ba19a352dde4dfb5900af8629414
+ARG PRISM_RELEASE_REVISION=ae66110630662b728d31b3f9cd13c4920f39e260
 RUN git pull && git checkout $PRISM_RELEASE_REVISION \
   && mvn clean install -P -dist -DskipTests=true \
   && git clean -df
@@ -62,7 +62,7 @@ RUN git pull && git checkout $BASE_REVISION \
  && git clean -df
 
 # Build with release version
-ARG RELEASE_REVISION=1db4c9774042646f3bc67642643b1f05c64b5201
+ARG RELEASE_REVISION=31fdc25a71bdff8c4c9486ab3c8985f6e9a304b3
 RUN git pull && git checkout $RELEASE_REVISION \
   && mvn clean install -P dist -DskipTests=true \
   && mv gui/midpoint-jar/target/midpoint.jar /build/midpoint.jar \
