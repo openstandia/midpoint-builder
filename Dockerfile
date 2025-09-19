@@ -13,18 +13,20 @@ RUN git pull && git checkout $LOCALIZATION_REVISION \
 
 # Build midpoint
 WORKDIR /build
-RUN git clone --branch support-4.0 --single-branch https://github.com/Evolveum/midpoint
+RUN git clone --branch support-4.0-multiaccount-outbound --single-branch https://github.com/openstandia/midpoint
 
 WORKDIR /build/midpoint
 
 # Cache dependencies with base version
 ARG BASE_REVISION=v4.0.3
 RUN git pull && git checkout $BASE_REVISION \
+  && mkdir -p ~/.m2 \
+  && echo '<settings><mirrors><mirror><id>jaspersoft-https</id><mirrorOf>jaspersoft-third-party</mirrorOf><url>https://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/</url></mirror></mirrors></settings>' > ~/.m2/settings.xml \
   && mvn clean install -P -dist -DskipTests=true \
   && git clean -df
 
 # Cache dependencies with release version
-ARG RELEASE_REVISION=27df48eba9f88b39e2bf5cfec6e862fceb5772ba
+ARG RELEASE_REVISION=80a6fdf4a37411856bbc732d257d4e8797ecd7e5
 RUN git pull && git checkout $RELEASE_REVISION \
   && mvn clean install -P -dist -DskipTests=true \
   && mv gui/admin-gui/target/midpoint-executable.war /build/midpoint.war \

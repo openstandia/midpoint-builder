@@ -3,7 +3,7 @@ name: Build and Publish Docker
 on:
   push:
     branches:
-      - support-4.0
+      - support-4.0-multiaccount-outbound
 
 jobs:
   build_and_push:
