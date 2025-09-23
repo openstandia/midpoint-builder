@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BRANCH=support-4.8
+BRANCH=support-4.9
 
 LOCALIZATION_REPO_URL=https://github.com/Evolveum/midpoint-localization
 PRISM_REPO_URL=https://github.com/Evolveum/prism
