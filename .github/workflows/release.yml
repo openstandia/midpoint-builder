@@ -3,7 +3,7 @@ name: Build and Publish Docker
 on:
   push:
     branches:
-      - support-4.9
+      - main
 
 jobs:
   build_and_push:
