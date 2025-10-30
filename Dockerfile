@@ -26,7 +26,7 @@ RUN git pull && git checkout $BASE_REVISION \
   && git clean -df
 
 # Cache dependencies with release version
-ARG RELEASE_REVISION=1b4607fccd60bfb530205e4f626b889aa7e31368
+ARG RELEASE_REVISION=37bb074a4e22d7b95d2b5938aeeb91959a3956ba
 RUN git pull && git checkout $RELEASE_REVISION \
   && mvn clean install -P -dist -DskipTests=true \
   && mv gui/admin-gui/target/midpoint-executable.war /build/midpoint.war \
