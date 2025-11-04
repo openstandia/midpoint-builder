@@ -14,7 +14,7 @@ WORKDIR /build/midpoint-localization
 #   && mvn clean install \
 #   && git clean -df
 
-ARG LOCALIZATION_RELEASE_REVISION=059a318bfc55ffb9d5b15010ccfb895a53da7096
+ARG LOCALIZATION_RELEASE_REVISION=23c730ad7d51b6f317124723498b9f756ad7c426
 RUN git pull && git checkout $LOCALIZATION_RELEASE_REVISION \
   && mvn clean install \
   && git clean -df
@@ -28,7 +28,7 @@ RUN git clone --branch master --single-branch https://github.com/Evolveum/prism
 
 WORKDIR /build/prism
 
-ARG PRISM_RELEASE_REVISION=9aded044ad82bbd165f376e41159f87eb44a67a9
+ARG PRISM_RELEASE_REVISION=4e64b36efef2fea8c253a256b354ec07450c9de2
 RUN git pull && git checkout $PRISM_RELEASE_REVISION \
   && mvn clean install -P -dist -DskipTests=true \
   && git clean -df
@@ -38,7 +38,7 @@ FROM maven:3.9.5-eclipse-temurin-17 as builder
 
 # Build midpoint
 WORKDIR /build
-RUN git clone --branch milestone/4.10-RC1 --single-branch https://github.com/Evolveum/midpoint
+RUN git clone --branch milestone/4.10-RC2 --single-branch https://github.com/Evolveum/midpoint
 
 WORKDIR /build/midpoint
 
@@ -53,7 +53,7 @@ COPY --from=prism \
   /root/.m2/repository/com/evolveum/prism/
 
 # Cache dependencies with base version
-ARG BASE_REVISION=v4.10-RC1
+ARG BASE_REVISION=v4.10-RC2
 RUN git pull && git checkout $BASE_REVISION \
  && mvn verify clean --fail-never \
  && git clean -df
@@ -62,14 +62,14 @@ RUN git pull && git checkout $BASE_REVISION \
  && git clean -df
 
 # Build with release version
-ARG RELEASE_REVISION=b02ad707d831d030faefe9f89ca98b394e83a1af
+ARG RELEASE_REVISION=0b2f7583e0a6dddca8b543b92cc1ec34a192e388
 RUN git pull && git checkout $RELEASE_REVISION \
   && mvn clean install -P dist -DskipTests=true \
   && mv gui/midpoint-jar/target/midpoint.jar /build/midpoint.jar \
   && git clean -df
 
 # Define base image tag
-ARG BASE_IMAGE_TAG=4.10-RC1
+ARG BASE_IMAGE_TAG=4.10-RC2
 
 # Create VERSION file
 RUN git rev-parse HEAD > /build/VERSION.txt
