@@ -1,4 +1,4 @@
-FROM maven:3.9.5-eclipse-temurin-17 as localization
+FROM maven:3.9.5-eclipse-temurin-17 AS localization
 
 # Build midpoint-localization
 WORKDIR /build
@@ -20,7 +20,7 @@ RUN git pull && git checkout $LOCALIZATION_RELEASE_REVISION \
   && git clean -df
 
 
-FROM maven:3.9.5-eclipse-temurin-17 as prism
+FROM maven:3.9.5-eclipse-temurin-17 AS prism
 
 # Build prism
 WORKDIR /build
@@ -34,7 +34,7 @@ RUN git pull && git checkout $PRISM_RELEASE_REVISION \
   && git clean -df
 
 
-FROM maven:3.9.5-eclipse-temurin-17 as builder
+FROM maven:3.9.5-eclipse-temurin-17 AS builder
 
 # Build midpoint
 WORKDIR /build
@@ -65,7 +65,6 @@ RUN git pull && git checkout $BASE_REVISION \
 ARG RELEASE_REVISION=24975d6c70fefa691c97591ec295d43d78172743
 RUN git pull && git checkout $RELEASE_REVISION \
   && mvn clean install -P dist -DskipTests=true \
-  && mv gui/midpoint-jar/target/midpoint.jar /build/midpoint.jar \
   && git clean -df
 
 # Define base image tag
@@ -79,3 +78,27 @@ WORKDIR /build/extension/
 ADD pom.xml /build/extension/
 RUN mvn clean install
 
+
+FROM maven:3.9.5-eclipse-temurin-17
+
+WORKDIR /build
+
+# Copy maven local repository
+COPY --from=builder \
+  /root/.m2 \
+  /root/.m2
+
+# Copy midpoint.jar
+COPY --from=builder \
+  /build/midpoint/gui/midpoint-jar/target/midpoint.jar \
+  /build/
+
+# Copy ninja.jar
+COPY --from=builder \
+  /build/midpoint/tools/ninja/target/ninja.jar \
+  /build/
+
+# Copy VERSION.txt
+COPY --from=builder \
+  /build/VERSION.txt \
+  /build/
