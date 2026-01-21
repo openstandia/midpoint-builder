@@ -62,7 +62,7 @@ RUN git pull && git checkout $BASE_REVISION \
  && git clean -df
 
 # Build with release version
-ARG RELEASE_REVISION=9a2a17a2c60ad02df523632a73fa43fdc41d323b
+ARG RELEASE_REVISION=7960f5bfdccc45e5e0f8670ebe025ace5abf544a
 RUN git pull && git checkout $RELEASE_REVISION \
   && mvn clean install -P dist -DskipTests=true \
   && git clean -df
